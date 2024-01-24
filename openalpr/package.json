@@ -1,0 +1,13 @@
+{
+  "dependencies": {
+    "amqplib": "latest",
+    "exec": "latest",
+    "express": "latest",
+    "multer": "latest",
+    "fs": "latest",
+    "minio": "latest",
+    "mongodb": "latest",
+    "nodemailer": "latest",
+    "path": "latest"
+  }
+}

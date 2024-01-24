@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+   "amqplib": "latest",
+   "express": "latest",
+   "minio": "latest",
+   "mongodb": "latest",
+   "nodemailer": "latest",
+   "multer": "latest"
+  }
+}

@@ -1,0 +1,65 @@
+version: '3'
+services:
+
+
+
+  minio:
+    image: minio/minio
+    ports:
+      - "9000:9000"    # Port for Minio browser
+      - "9001:9001"    # Port for Minio console
+    environment:
+      MINIO_ROOT_USER: "admin123"
+      MINIO_ROOT_PASSWORD: "admin123"
+      MINIO_CONSOLE_PORT: "9001"
+    command: server --console-address ":9001" /data
+ 
+
+
+  rabbitmq:
+    image: "rabbitmq:management"
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+
+
+  app1:
+    build: ./app1
+    ports:
+      - "3001:3001"
+    depends_on:
+      - rabbitmq
+      - minio
+      - mongodb
+
+
+  app2:
+    build: ./app2
+    ports:
+      - "3002:3002"
+    depends_on:
+      - rabbitmq
+      - minio
+      - app1
+      - mongodb
+
+  app3:
+    build: ./openalpr
+    ports:
+      - "3003:3003"
+    depends_on:
+      - rabbitmq
+      - minio
+      - app2
+      - mongodb
+    restart: "no"
+    
+  mongodb:
+    image: mongo
+    ports:
+      - "27017:27017"
+
+
+volumes:
+  minio_data:
